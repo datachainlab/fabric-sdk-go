@@ -73,10 +73,7 @@ func WithEndorsingPeers(peers ...string) TransactionOption {
 	}
 }
 
-// Evaluate a transaction function and return its results.
-// The transaction function will be evaluated on the endorsing peers but
-// the responses will not be sent to the ordering service and hence will
-// not be committed to the ledger. This can be used for querying the world state.
+// Query a transaction function and return result as response struct type.
 func (txn *Transaction) Query(args ...string) (*channel.Response, error) {
 	bytes := make([][]byte, len(args))
 	for i, v := range args {
@@ -98,11 +95,28 @@ func (txn *Transaction) Query(args ...string) (*channel.Response, error) {
 	return &response, nil
 }
 
+// Evaluate a transaction function and return its results.
+// The transaction function will be evaluated on the endorsing peers but
+// the responses will not be sent to the ordering service and hence will
+// not be committed to the ledger. This can be used for querying the world state.
 func (txn *Transaction) Evaluate(args ...string) ([]byte, error) {
-	response, err := txn.Query(args...)
+	bytes := make([][]byte, len(args))
+	for i, v := range args {
+		bytes[i] = []byte(v)
+	}
+	txn.request.Args = bytes
+
+	var options []channel.RequestOption
+	options = append(options, channel.WithTimeout(fab.Query, txn.contract.network.gateway.options.Timeout))
+
+	response, err := txn.contract.client.Query(
+		*txn.request,
+		options...,
+	)
 	if err != nil {
 		return nil, errors.Wrap(err, "Failed to evaluate")
 	}
+
 	return response.Payload, nil
 }
 
