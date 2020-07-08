@@ -78,7 +78,7 @@ func WithEndorsingPeers(peers ...string) TransactionOption {
 // The transaction function will be evaluated on the endorsing peers but
 // the responses will not be sent to the ordering service and hence will
 // not be committed to the ledger. This can be used for querying the world state.
-func (txn *Transaction) Evaluate(args ...string) ([]byte, error) {
+func (txn *Transaction) Query(args ...string) (*channel.Response, error) {
 	bytes := make([][]byte, len(args))
 	for i, v := range args {
 		bytes[i] = []byte(v)
@@ -99,6 +99,14 @@ func (txn *Transaction) Evaluate(args ...string) ([]byte, error) {
 		return nil, errors.Wrap(err, "Failed to evaluate")
 	}
 
+	return &response, nil
+}
+
+func (txn *Transaction) Evaluate(args ...string) ([]byte, error) {
+	response, err := txn.Query(args...)
+	if err != nil {
+		return nil, errors.Wrap(err, "Failed to evaluate")
+	}
 	return response.Payload, nil
 }
 
