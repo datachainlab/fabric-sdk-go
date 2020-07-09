@@ -8,8 +8,10 @@ import (
 	"github.com/hyperledger/fabric-sdk-go/pkg/common/providers/fab"
 )
 
-// Query a transaction function and return result as response struct type.
-func (txn *Transaction) Query(args ...string) (*channel.Response, error) {
+// Execute a transaction to the ledger. The transaction function represented by this object
+// will be evaluated on the endorsing peers and then submitted to the ordering service
+// for committing to the ledger.
+func (txn *Transaction) Execute(args ...string) (*channel.Response, error) {
 	bytes := make([][]byte, len(args))
 	for i, v := range args {
 		bytes[i] = []byte(v)
@@ -17,14 +19,18 @@ func (txn *Transaction) Query(args ...string) (*channel.Response, error) {
 	txn.request.Args = bytes
 
 	var options []channel.RequestOption
-	options = append(options, channel.WithTimeout(fab.Query, txn.contract.network.gateway.options.Timeout))
+	if txn.endorsingPeers != nil {
+		options = append(options, channel.WithTargetEndpoints(txn.endorsingPeers...))
+	}
+	options = append(options, channel.WithTimeout(fab.Execute, txn.contract.network.gateway.options.Timeout))
 
-	response, err := txn.contract.client.Query(
+	response, err := txn.contract.client.InvokeHandler(
+		newSubmitHandler(txn.eventch),
 		*txn.request,
 		options...,
 	)
 	if err != nil {
-		return nil, errors.Wrap(err, "Failed to evaluate")
+		return nil, errors.Wrap(err, "Failed to submit")
 	}
 
 	return &response, nil
