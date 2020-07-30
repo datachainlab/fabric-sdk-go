@@ -54,19 +54,13 @@ declare -a FILES=(
     "bccsp/sw/impl.go"
     "bccsp/sw/inmemoryks.go"
     "bccsp/sw/internals.go"
+    "bccsp/sw/keys.go"
     "bccsp/sw/keyderiv.go"
     "bccsp/sw/keygen.go"
     "bccsp/sw/keyimport.go"
     "bccsp/sw/new.go"
 
-    "bccsp/utils/errs.go"
-    "bccsp/utils/io.go"
-    "bccsp/utils/keys.go"
-    "bccsp/utils/slice.go"
-    "bccsp/utils/x509.go"
     "bccsp/utils/ecdsa.go"
-
-    "core/comm/config.go"
 
     "common/configtx/configtx.go"
 
@@ -107,26 +101,6 @@ declare -a FILES=(
     "common/metrics/statsd/goruntime/collector.go"
     "common/metrics/statsd/goruntime/metrics.go"
     "common/metrics/statsd/provider.go"
-
-    "common/tools/protolator/api.go"
-    "common/tools/protolator/dynamic.go"
-    "common/tools/protolator/json.go"
-    "common/tools/protolator/nested.go"
-    "common/tools/protolator/statically_opaque.go"
-    "common/tools/protolator/variably_opaque.go"
-    "common/tools/protolator/protoext/decorate.go"
-    "common/tools/protolator/protoext/commonext/common.go"
-    "common/tools/protolator/protoext/commonext/configtx.go"
-    "common/tools/protolator/protoext/commonext/configuration.go"
-    "common/tools/protolator/protoext/commonext/policies.go"
-    "common/tools/protolator/protoext/ledger/rwsetext/rwset.go"
-    "common/tools/protolator/protoext/mspext/msp_config.go"
-    "common/tools/protolator/protoext/mspext/msp_principal.go"
-    "common/tools/protolator/protoext/ordererext/configuration.go"
-    "common/tools/protolator/protoext/peerext/configuration.go"
-    "common/tools/protolator/protoext/peerext/proposal.go"
-    "common/tools/protolator/protoext/peerext/proposal_response.go"
-    "common/tools/protolator/protoext/peerext/transaction.go"
 
     "core/middleware/chain.go"
     "core/middleware/request_id.go"
@@ -177,6 +151,19 @@ declare -a FILES=(
 
     "sdkinternal/pkg/identity/identity.go"
 
+    "sdkinternal/pkg/comm/config.go"
+    "sdkinternal/pkg/txflags/validation_flags.go"
+
+    "core/chaincode/platforms/golang/list.go"
+    "core/chaincode/platforms/golang/platform.go"
+    "core/chaincode/platforms/java/platform.go"
+    "core/chaincode/platforms/node/platform.go"
+    "core/chaincode/platforms/util/writer.go"
+    "core/chaincode/persistence/persistence.go"
+    "core/chaincode/platforms/platforms.go"
+    "core/chaincode/persistence/chaincode_package.go"
+    "sdkinternal/ccmetadata/validators.go"
+    "sdkinternal/peer/packaging/platforms.go"
 )
 
 # Copy patched project into internal paths and insert modification notice

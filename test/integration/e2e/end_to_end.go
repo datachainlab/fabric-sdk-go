@@ -18,7 +18,7 @@ import (
 	"github.com/stretchr/testify/require"
 
 	"github.com/hyperledger/fabric-sdk-go/test/integration"
-	"github.com/hyperledger/fabric-sdk-go/third_party/github.com/hyperledger/fabric/common/cauthdsl"
+	"github.com/hyperledger/fabric-sdk-go/third_party/github.com/hyperledger/fabric/common/policydsl"
 
 	"github.com/hyperledger/fabric-sdk-go/pkg/client/channel"
 	"github.com/hyperledger/fabric-sdk-go/pkg/client/resmgmt"
@@ -38,7 +38,7 @@ const (
 )
 
 var (
-	ccID = "example_cc_e2e" + metadata.TestRunID
+	ccID = "example_cc_fabtest_e2e" + metadata.TestRunID
 )
 
 // Run enables testing an end-to-end scenario against the supplied SDK options
@@ -200,7 +200,7 @@ func createCC(t *testing.T, orgResMgmt *resmgmt.Client) {
 		t.Fatal(err)
 	}
 	// Set up chaincode policy
-	ccPolicy := cauthdsl.SignedByAnyMember([]string{"Org1MSP"})
+	ccPolicy := policydsl.SignedByAnyMember([]string{"Org1MSP"})
 	// Org resource manager will instantiate 'example_cc' on channel
 	resp, err := orgResMgmt.InstantiateCC(
 		channelID,

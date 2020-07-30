@@ -21,14 +21,12 @@ import (
 	"time"
 
 	"github.com/golang/protobuf/proto"
-
-	"github.com/hyperledger/fabric-sdk-go/pkg/util/protolator"
-
-	"github.com/hyperledger/fabric-sdk-go/pkg/util/test"
-
-	"github.com/hyperledger/fabric-sdk-go/pkg/fab/resource"
-
+	"github.com/hyperledger/fabric-config/protolator"
 	"github.com/hyperledger/fabric-protos-go/common"
+	"github.com/hyperledger/fabric-sdk-go/internal/github.com/hyperledger/fabric/sdkpatch/keyutil"
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
+
 	"github.com/hyperledger/fabric-sdk-go/internal/github.com/hyperledger/fabric/bccsp/utils"
 	"github.com/hyperledger/fabric-sdk-go/pkg/client/channel"
 	"github.com/hyperledger/fabric-sdk-go/pkg/client/common/discovery/dynamicdiscovery"
@@ -43,12 +41,12 @@ import (
 	"github.com/hyperledger/fabric-sdk-go/pkg/core/config/lookup"
 	"github.com/hyperledger/fabric-sdk-go/pkg/core/mocks"
 	fabImpl "github.com/hyperledger/fabric-sdk-go/pkg/fab"
+	"github.com/hyperledger/fabric-sdk-go/pkg/fab/resource"
 	"github.com/hyperledger/fabric-sdk-go/pkg/fabsdk"
 	"github.com/hyperledger/fabric-sdk-go/pkg/fabsdk/factory/defsvc"
 	"github.com/hyperledger/fabric-sdk-go/pkg/fabsdk/provider/chpvdr"
+	"github.com/hyperledger/fabric-sdk-go/pkg/util/test"
 	"github.com/hyperledger/fabric-sdk-go/test/integration"
-	"github.com/stretchr/testify/assert"
-	"github.com/stretchr/testify/require"
 )
 
 const (
@@ -764,7 +762,7 @@ func loadPrivateKey(t *testing.T, path string) interface{} {
 	raw, err := ioutil.ReadFile(path)
 	require.NoError(t, err, "Failed to read PK @ '%s'", path)
 
-	key, err := utils.PEMtoPrivateKey(raw, []byte(""))
+	key, err := keyutil.PEMToPrivateKey(raw, []byte(""))
 	require.NoError(t, err, "Failed to convert PEM data to PK")
 
 	return key

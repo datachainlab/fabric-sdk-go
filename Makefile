@@ -58,9 +58,6 @@ FABRIC_TOOLS_VERSION ?= $(FABRIC_STABLE_VERSION)
 FABRIC_TOOLS_IMAGE ?= hyperledger/fabric-tools
 FABRIC_TOOLS_TAG   ?= $(FABRIC_ARCH)-$(FABRIC_TOOLS_VERSION)
 
-# TODO: Make SDK compatible with latest cryptogen (https://jira.hyperledger.org/browse/FABG-977).
-FABRIC_TOOLS_CRYPTOGEN_TAG   ?= $(FABRIC_ARCH)-$(FABRIC_PREV_VERSION)
-
 # Fabric docker registries (overridable)
 FABRIC_RELEASE_REGISTRY     ?=
 FABRIC_DEV_REGISTRY         ?= nexus3.hyperledger.org:10001
@@ -71,9 +68,9 @@ BASE_GO_VERSION = "1.14"
 
 # Upstream fabric patching (overridable)
 THIRDPARTY_FABRIC_CA_BRANCH ?= master
-THIRDPARTY_FABRIC_CA_COMMIT ?= 02fe02b0a6f224aac8ac6fd813cecc590ec2a024
+THIRDPARTY_FABRIC_CA_COMMIT ?= 3a1323dafce1ecbe79444fc8701596e34f18d3e0
 THIRDPARTY_FABRIC_BRANCH    ?= master
-THIRDPARTY_FABRIC_COMMIT    ?= v2.0.0-beta
+THIRDPARTY_FABRIC_COMMIT    ?= v2.2.0
 
 # Force removal of images in cleanup (overridable)
 FIXTURE_DOCKER_REMOVE_FORCE ?= false
@@ -122,7 +119,7 @@ TEST_SCRIPTS_PATH      := test/scripts
 SOCAT_DOCKER_IMG       := $(shell docker images -q fabsdkgo-socat 2> /dev/null)
 
 # Tool commands
-MOCKGEN_CMD := gobin -run github.com/golang/mock/mockgen
+MOCKGEN_CMD := gobin -run github.com/golang/mock/mockgen@v1.4.3
 
 # Test fixture paths
 FIXTURE_SCRIPTS_PATH      := $(THIS_PATH)/test/scripts
@@ -522,7 +519,7 @@ crypto-gen:
 	@echo "Generating crypto directory ..."
 	@$(DOCKER_CMD) run -i \
 		-v /$(abspath .):/opt/workspace/$(PROJECT_NAME) -u $(shell id -u):$(shell id -g) \
-		$(FABRIC_TOOLS_IMAGE):$(FABRIC_TOOLS_CRYPTOGEN_TAG) \
+		$(FABRIC_TOOLS_IMAGE):$(FABRIC_TOOLS_TAG) \
 		//bin/bash -c "FABRIC_VERSION_DIR=fabric/$(FABRIC_CRYPTOCONFIG_VER) /opt/workspace/${PROJECT_NAME}/test/scripts/generate_crypto.sh"
 
 .PHONY: channel-config-gen
