@@ -72,12 +72,6 @@ github.com/hyperledger/fabric-config v0.0.5 h1:khRkm8U9Ghdg8VmZfptgzCFlCzrka8bPf
 github.com/hyperledger/fabric-config v0.0.5/go.mod h1:YpITBI/+ZayA3XWY5lF302K7PAsFYjEEPM/zr3hegA8=
 github.com/hyperledger/fabric-lib-go v1.0.0 h1:UL1w7c9LvHZUSkIvHTDGklxFv2kTeva1QI2emOVc324=
 github.com/hyperledger/fabric-lib-go v1.0.0/go.mod h1:H362nMlunurmHwkYqR5uHL2UDWbQdbfz74n8kbCFsqc=
-<<<<<<< HEAD
-github.com/hyperledger/fabric-protos-go v0.0.0-20191121202242-f5500d5e3e85 h1:bNgEcCg5NVRWs/T+VUEfhgh5Olx/N4VB+0+ybW+oSuA=
-github.com/hyperledger/fabric-protos-go v0.0.0-20191121202242-f5500d5e3e85/go.mod h1:xVYTjK4DtZRBxZ2D9aE4y6AbLaPwue2o/criQyQbVD0=
-github.com/hyperledger/fabric-protos-go v0.0.0-20200506201313-25f6564b9ac4 h1:75hBp86WljV3uQ7Q/wbO5w8ahfLAzxH7jfT5kVy2n6g=
-github.com/hyperledger/fabric-protos-go v0.0.0-20200506201313-25f6564b9ac4/go.mod h1:xVYTjK4DtZRBxZ2D9aE4y6AbLaPwue2o/criQyQbVD0=
-=======
 github.com/hyperledger/fabric-protos-go v0.0.0-20200424173316-dd554ba3746e h1:9PS5iezHk/j7XriSlNuSQILyCOfcZ9wZ3/PiucmSE8E=
 github.com/hyperledger/fabric-protos-go v0.0.0-20200424173316-dd554ba3746e/go.mod h1:xVYTjK4DtZRBxZ2D9aE4y6AbLaPwue2o/criQyQbVD0=
 github.com/hyperledger/fabric-protos-go v0.0.0-20200707132912-fee30f3ccd23 h1:SEbB3yH4ISTGRifDamYXAst36gO2kM855ndMJlsv+pc=
@@ -92,7 +86,6 @@ github.com/kisielk/sqlstruct v0.0.0-20150923205031-648daed35d49/go.mod h1:yyMNCy
 github.com/kisom/goutils v1.1.0/go.mod h1:+UBTfd78habUYWFbNWTJNG+jNG/i/lGURakr4A/yNRw=
 github.com/konsorten/go-windows-terminal-sequences v1.0.1/go.mod h1:T0+1ngSBFLxvqU3pZ+m/2kptfBszLMUkC4ZK/EgS/cQ=
 github.com/kr/fs v0.1.0/go.mod h1:FFnZGqtBN9Gxj7eW1uZ42v5BccTP0vu6NEaFoC2HwRg=
->>>>>>> upstream/master
 github.com/kr/logfmt v0.0.0-20140226030751-b84e30acd515 h1:T+h1c/A9Gawja4Y9mFVWj2vyii2bbUNDw3kt9VxK2EY=
 github.com/kr/logfmt v0.0.0-20140226030751-b84e30acd515/go.mod h1:+0opPa2QZZtGFBFZlji/RkVcI2GknAs/DXo4wKdlNEc=
 github.com/kr/pretty v0.1.0 h1:L/CwN0zerZDmRFUapSPitk6f+Q3+0za1rQkzVuMiMFI=
